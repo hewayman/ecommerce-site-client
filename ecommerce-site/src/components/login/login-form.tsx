@@ -2,20 +2,43 @@
 
 import { FormEvent, useState } from 'react';
 import { Button, TextField } from '@mui/material';
+import APIURL from '@/helpers/environment';
+import useLocalStorage from '@/hooks/useLocalStorage';
 import styles from './login-form.module.css';
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
+  const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [sessionToken, setSessionToken] = useLocalStorage('token', '');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(email, password);
+    const url = `${APIURL}/user/login`;
+    const body = {
+      email: email,
+      password: password,
+    };
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setSessionToken(data.sessionToken);
+        router.push('/');
+      });
   };
 
   return (
     <div className={styles.container}>
+      Login
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
         <TextField
           margin="normal"
