@@ -1,19 +1,29 @@
 'use client';
 
-import { Button } from '@mui/material';
-import { useRouter } from 'next/navigation';
-import styles from './page.module.css';
+import Hero from '@/components/home/hero';
+import Navbar from '@/components/site/navbar';
+import { useEffect, useState } from 'react';
+// import styles from './page.module.css';
 
 const Home = () => {
-  const router = useRouter();
+  const [sessionToken, setSessionToken] = useState<string>('');
 
-  const handleOnClick = () => {
-    router.push('/listing');
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setSessionToken(localStorage.getItem('token') as string);
+    }
+  }, []);
+
+  const updateToken = (newToken: string) => {
+    localStorage.setItem('token', newToken);
+    setSessionToken(newToken);
+    console.log('sessionToken', sessionToken);
   };
 
   return (
-    <main className={styles.main}>
-      <Button onClick={handleOnClick}>text test</Button>
+    <main>
+      <Navbar />
+      <Hero />
     </main>
   );
 };
