@@ -1,17 +1,17 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import APIURL from '@/helpers/environment';
-import useLocalStorage from '@/hooks/useLocalStorage';
 import styles from './login-form.module.css';
 import { useRouter } from 'next/navigation';
+import { AuthContext } from '../AuthContext';
 
 const LoginForm = () => {
+  const context = useContext(AuthContext);
   const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [sessionToken, setSessionToken] = useLocalStorage('token', '');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,9 +31,9 @@ const LoginForm = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setSessionToken(data.sessionToken);
-        router.push('/');
-      });
+        context.setTokenContext(data.sessionToken);
+      })
+      .then(() => router.push('/'));
   };
 
   return (
