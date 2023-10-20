@@ -1,7 +1,7 @@
 'use client';
 
 import { AuthContext } from '@/components/AuthContext';
-import LoginForm from '@/components/login/login-form';
+import LoginForm from '@/components/Auth/LoginForm';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 const Login = () => {

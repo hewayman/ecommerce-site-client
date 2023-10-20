@@ -1,8 +1,8 @@
 'use client';
 
-import Navbar from '@/components/site/navbar';
-import useLocalStorage from '@/hooks/useLocalStorage';
 import { AuthContext } from '@/components/AuthContext';
+import Navbar from '@/components/Navbar/Navbar';
+import useLocalStorage from '@/hooks/useLocalStorage';
 // import styles from './page.module.css';
 
 const Home = () => {

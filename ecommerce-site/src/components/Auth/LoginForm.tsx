@@ -1,10 +1,10 @@
 'use client';
 
 import { FormEvent, useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button, TextField } from '@mui/material';
 import APIURL from '@/helpers/environment';
-import styles from './register-form.module.css';
-import { useRouter } from 'next/navigation';
+import styles from './LoginForm.module.css';
 import { AuthContext } from '../AuthContext';
 
 const LoginForm = () => {
@@ -16,7 +16,7 @@ const LoginForm = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const url = `${APIURL}/user/register`;
+    const url = `${APIURL}/user/login`;
     const body = {
       email: email,
       password: password,
@@ -38,7 +38,7 @@ const LoginForm = () => {
 
   return (
     <div className={styles.container}>
-      Sign Up
+      Login
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
         <TextField
           margin="normal"

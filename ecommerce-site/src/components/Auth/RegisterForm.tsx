@@ -3,7 +3,7 @@
 import { FormEvent, useContext, useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import APIURL from '@/helpers/environment';
-import styles from './login-form.module.css';
+import styles from './RegisterForm.module.css';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '../AuthContext';
 
@@ -16,7 +16,7 @@ const LoginForm = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const url = `${APIURL}/user/login`;
+    const url = `${APIURL}/user/register`;
     const body = {
       email: email,
       password: password,
@@ -38,7 +38,7 @@ const LoginForm = () => {
 
   return (
     <div className={styles.container}>
-      Login
+      Sign Up
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
         <TextField
           margin="normal"

@@ -1,7 +1,7 @@
 'use client';
 
 import { AuthContext } from '@/components/AuthContext';
-import RegisterForm from '@/components/register/register-form';
+import RegisterForm from '@/components/Auth/RegisterForm';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 const Register = () => {

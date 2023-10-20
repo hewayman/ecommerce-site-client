@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import { Box, Button } from '@mui/material';
-import styles from './navbar.module.css';
+import styles from './Navbar.module.css';
 import { AuthContext } from '../AuthContext';
 
 const Navbar = () => {
@@ -13,8 +13,12 @@ const Navbar = () => {
 
   return (
     <Box>
-      <Link href="/login">Login</Link>
-      <Link href="/register">Sign Up</Link>
+      <Link href="/login">
+        <Button className={styles.button}>Log In</Button>
+      </Link>
+      <Link href="/register">
+        <Button className={styles.button}>Sign Up</Button>
+      </Link>
       <Button onClick={clearToken} className={styles.button}>
         Log Out
       </Button>
