@@ -10,6 +10,8 @@ import { AuthContext } from '../AuthContext';
 const LoginForm = () => {
   const context = useContext(AuthContext);
   const router = useRouter();
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -18,6 +20,8 @@ const LoginForm = () => {
 
     const url = `${APIURL}/user/register`;
     const body = {
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password,
     };
@@ -34,7 +38,8 @@ const LoginForm = () => {
         context.setTokenContext(data.sessionToken);
         context.setUserIdContext(data.user.id);
       })
-      .then(() => router.push('/'));
+      .then(() => router.push('/'))
+      .catch((error) => console.log({ error }));
   };
 
   return (
@@ -44,11 +49,29 @@ const LoginForm = () => {
         <TextField
           margin="normal"
           required
+          id="firstName"
+          label="First Name"
+          name="firstName"
+          autoComplete="firstName"
+          autoFocus
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <TextField
+          margin="normal"
+          required
+          id="lastName"
+          label="Last Name"
+          name="lastName"
+          autoComplete="lastName"
+          onChange={(e) => setLastName(e.target.value)}
+        />
+        <TextField
+          margin="normal"
+          required
           id="email"
           label="Email Address"
           name="email"
           autoComplete="email"
-          autoFocus
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField

@@ -12,6 +12,7 @@ const LoginForm = () => {
   const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,7 +35,8 @@ const LoginForm = () => {
         context.setTokenContext(data.sessionToken);
         context.setUserIdContext(data.user.id);
       })
-      .then(() => router.push('/'));
+      .then(() => router.push('/'))
+      .catch((err) => setErrorMessage('Incorrect email or password'));
   };
 
   return (
@@ -70,6 +72,7 @@ const LoginForm = () => {
           Sign In
         </Button>
       </form>
+      {errorMessage}
     </div>
   );
 };
