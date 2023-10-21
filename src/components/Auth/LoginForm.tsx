@@ -32,6 +32,7 @@ const LoginForm = () => {
       .then((res) => res.json())
       .then((data) => {
         context.setTokenContext(data.sessionToken);
+        context.setUserIdContext(data.user.id);
       })
       .then(() => router.push('/'));
   };
