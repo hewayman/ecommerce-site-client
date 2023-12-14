@@ -1,4 +1,5 @@
 export type StoreItem = {
+  id: number;
   itemName: string;
   color: string;
   description: string;
